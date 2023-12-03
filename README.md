@@ -19,14 +19,15 @@ export $(cat .env | xargs)
 ```bash
 ./mvnw clean package
 ```
-5. Run the HelloBot example:
+5. Use the following commands to run each example:
 ```bash
-./mvnw exec:java -D'exec.mainClass=com.yugoccp.example.HelloBot'
-```
+./mvnw exec:java -D'exec.mainClass=_00_HelloTDC'
 
-6. Or run the EmojiBot example:
-```bash
-./mvnw exec:java -D'exec.mainClass=com.yugoccp.example.EmojiBot'
-```
+./mvnw exec:java -D'exec.mainClass=_01_Prompt'
 
-## Reference
+./mvnw exec:java -D'exec.mainClass=_02_Memory'
+
+./mvnw exec:java -D'exec.mainClass=_03_Agents'
+
+./mvnw exec:java -D'exec.mainClass=_04_Retrieval'
+```
