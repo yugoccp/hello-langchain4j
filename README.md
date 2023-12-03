@@ -2,7 +2,7 @@
 
 Sample project to start using the power of Langchain for Java! 
 
-Specially created to be used in [The Developer's Conference 2023](https://thedevconf.com/tdc/2023/future/) Future edition.
+Specially created for [The Developer's Conference 2023](https://thedevconf.com/tdc/2023/future/) Future edition.
 
 ## Requirements
 - Java 17
