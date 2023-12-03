@@ -33,3 +33,8 @@ export $(cat .env | xargs)
 
 ./mvnw exec:java -D'exec.mainClass=_04_Retrieval'
 ```
+
+## References
+[langchain4j-examples](https://github.com/langchain4j/langchain4j-examples)
+[Introduction to LangChain](https://www.baeldung.com/java-langchain-basics)
+[Java Meets AI: A Hands-On Guide to Building LLM-Powered Applications with LangChain4j](https://devoxx.be/talk/?id=34002)
