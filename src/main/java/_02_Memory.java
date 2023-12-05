@@ -26,7 +26,7 @@ public class _02_Memory {
 
             while(true) {
 
-                System.out.println("Ask your question: ");
+                System.out.println("Enter your question: ");
                 String question = scanner.nextLine();
 
                 if(question.equals("exit")) {
@@ -40,6 +40,7 @@ public class _02_Memory {
                 chatMemory.add(response.content());
 
                 System.out.println(response.content().text());
+
                 System.out.println("\n\n########### TOKEN USAGE ############\n");
                 System.out.println(response.tokenUsage());
 

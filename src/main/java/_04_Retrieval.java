@@ -21,7 +21,7 @@ import static java.util.stream.Collectors.joining;
 
 public class _04_Retrieval {
 
-    private static String RETRIEVER_DOCUMENT_NAME = "news.pdf";
+    private static final String RETRIEVER_DOCUMENT_NAME = "news.pdf";
 
     public static void main(String[] args) {
 
@@ -55,7 +55,7 @@ public class _04_Retrieval {
 
             while(true) {
 
-                System.out.println("Ask your question: ");
+                System.out.println("Enter your question: ");
                 String question = scanner.nextLine();
 
                 if(question.equals("exit")) {
@@ -78,6 +78,7 @@ public class _04_Retrieval {
                 chatMemory.add(response.content());
 
                 System.out.println(response.content().text());
+
                 System.out.println("\n\n########### TOKEN USAGE ############\n");
                 System.out.println(response.tokenUsage());
             }

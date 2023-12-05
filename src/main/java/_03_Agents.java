@@ -1,6 +1,5 @@
 import dev.langchain4j.agent.tool.Tool;
 import dev.langchain4j.data.message.AiMessage;
-import dev.langchain4j.memory.ChatMemory;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.model.output.Response;
@@ -38,6 +37,7 @@ public class _03_Agents {
         var response = assistant.chat(question);
 
         System.out.println(response.content().text());
+
         System.out.println("\n\n########### TOKEN USAGE ############\n");
         System.out.println(response.tokenUsage());
     }

@@ -22,13 +22,15 @@ public class _01_Prompt {
                 EmojiBot: """);
 
         try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println("Movie name: ");
+
+            System.out.println("Enter a movie name: ");
 
             var movieName = scanner.nextLine();
             var prompt = promptTemplate.apply(Map.of("movieName", movieName));
             var response = chatModel.generate(prompt.toUserMessage());
 
             System.out.println(response.content().text());
+
             System.out.println("\n\n########### TOKEN USAGE ############\n");
             System.out.println(response.tokenUsage());
 

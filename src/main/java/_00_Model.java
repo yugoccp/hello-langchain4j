@@ -18,6 +18,7 @@ public class _00_Model {
         var response = chatModel.generate(UserMessage.from(prompt));
 
         System.out.println(response.content().text());
+
         System.out.println("\n\n########### TOKEN USAGE ############\n");
         System.out.println(response.tokenUsage());
     }
