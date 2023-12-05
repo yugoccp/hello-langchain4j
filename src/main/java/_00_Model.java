@@ -3,7 +3,7 @@ import dev.langchain4j.data.message.UserMessage;
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 
-public class _00_HelloTDC {
+public class _00_Model {
 
     public static void main(String[] args) {
 

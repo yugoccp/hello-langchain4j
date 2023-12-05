@@ -10,23 +10,22 @@ public class _02_Memory {
 
         String openAiKey = System.getenv("OPENAI_API_KEY");
 
-        var chatModel = OpenAiChatModel.builder()
-                .apiKey(openAiKey)
-                .logResponses(true)
-                .build();
+        var chatModel = OpenAiChatModel.withApiKey(openAiKey);
 
         var chatMemory = MessageWindowChatMemory.withMaxMessages(10);
 
         chatMemory.add(SystemMessage.from("""
            JavaBot is a Java expert who knows everything regarding to Java in the world.
            JavaBot recognize any question related with Java and reply with the correct answer.
-           JavaBot give detailed example with Java code for any question related with Java.
+           JavaBot give short Java code example for any question related with Java.
            JavaBot reply with 'Honk! Not Java question!' for any question not related with Java.
            """));
 
 
         try (Scanner scanner = new Scanner(System.in)) {
+
             while(true) {
+
                 System.out.println("Ask your question: ");
                 String question = scanner.nextLine();
 

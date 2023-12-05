@@ -34,6 +34,7 @@ public class _04_Retrieval {
         var embeddingStore = new InMemoryEmbeddingStore<TextSegment>();
         var retriever = EmbeddingStoreRetriever.from(embeddingStore, embeddingModel);
 
+        // #1 - Ingesting the document and store in vectorized form
         var ingestor = EmbeddingStoreIngestor.builder()
                 .documentSplitter(DocumentSplitters.recursive(500, 0))
                 .embeddingModel(embeddingModel)
@@ -61,8 +62,10 @@ public class _04_Retrieval {
                     break;
                 }
 
+                // #2 - Retrieving the most relevant segments according to the question
                 var relevantSegments = retriever.findRelevant(question);
 
+                // #3 - Generating the prompt with the relevant segments
                 var prompt = promptTemplate.apply(
                             Map.of(
                             "question", question,

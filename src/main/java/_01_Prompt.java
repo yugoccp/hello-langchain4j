@@ -10,9 +10,7 @@ public class _01_Prompt {
 
         var openAiKey = System.getenv("OPENAI_API_KEY");
 
-        var chatModel = OpenAiChatModel.builder()
-                .apiKey(openAiKey)
-                .build();
+        var chatModel = OpenAiChatModel.withApiKey(openAiKey);
 
         var promptTemplate = PromptTemplate.from("""
                 EmojiBot is a movie expert who knows the story of every existing movies in the world.
@@ -22,25 +20,18 @@ public class _01_Prompt {
                 
                 User: {{movieName}}
                 EmojiBot: """);
-        
+
         try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println("Movie name: ");
 
-            while(true) {
+            var movieName = scanner.nextLine();
+            var prompt = promptTemplate.apply(Map.of("movieName", movieName));
+            var response = chatModel.generate(prompt.toUserMessage());
 
-                System.out.println("Movie name: ");
-                var movieName = scanner.nextLine();
+            System.out.println(response.content().text());
+            System.out.println("\n\n########### TOKEN USAGE ############\n");
+            System.out.println(response.tokenUsage());
 
-                if(movieName.equals("exit")) {
-                    break;
-                }
-
-                var prompt = promptTemplate.apply(Map.of("movieName", movieName)).text();
-                var response = chatModel.generate(UserMessage.from(prompt));
-
-                System.out.println(response);
-                System.out.println("\n\n########### TOKEN USAGE ############\n");
-                System.out.println(response.tokenUsage());
-            }
         }   
     }
 }

@@ -1,5 +1,6 @@
 import dev.langchain4j.agent.tool.Tool;
 import dev.langchain4j.data.message.AiMessage;
+import dev.langchain4j.memory.ChatMemory;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.model.output.Response;
@@ -22,17 +23,13 @@ public class _03_Agents {
     interface Assistant {
         Response<AiMessage> chat(String userMessage);
     }
+
     public static void main(String[] args) {
 
         String openAiKey = System.getenv("OPENAI_API_KEY");
 
-        var chatModel = OpenAiChatModel.builder()
-                .logResponses(true)
-                .apiKey(openAiKey)
-                .build();
-
         var assistant = AiServices.builder(Assistant.class)
-                .chatLanguageModel(chatModel)
+                .chatLanguageModel(OpenAiChatModel.withApiKey(openAiKey))
                 .chatMemory(MessageWindowChatMemory.withMaxMessages(10))
                 .tools(new Calculator())
                 .build();

@@ -23,7 +23,7 @@ export $(cat .env | xargs)
 ```
 5. Use the following commands to run each example:
 ```bash
-./mvnw exec:java -D'exec.mainClass=_00_HelloTDC'
+./mvnw exec:java -D'exec.mainClass=_00_Model'
 
 ./mvnw exec:java -D'exec.mainClass=_01_Prompt'
 
