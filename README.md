@@ -29,9 +29,9 @@ export $(cat .env | xargs)
 
 ./mvnw exec:java -D'exec.mainClass=_02_Memory'
 
-./mvnw exec:java -D'exec.mainClass=_03_Agents'
+./mvnw exec:java -D'exec.mainClass=_03_Retrieval'
 
-./mvnw exec:java -D'exec.mainClass=_04_Retrieval'
+./mvnw exec:java -D'exec.mainClass=_04_Agents'
 ```
 
 ## References

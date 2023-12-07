@@ -1,4 +1,3 @@
-import dev.langchain4j.data.message.UserMessage;
 import dev.langchain4j.model.input.PromptTemplate;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 
@@ -15,7 +14,7 @@ public class _01_Prompt {
         var promptTemplate = PromptTemplate.from("""
                 EmojiBot is a movie expert who knows the story of every existing movies in the world.
                 EmojiBot can identify any movie title in the world
-                EmojiBot generates a movie plot only using emojis when recognizes a valid movie title.
+                EmojiBot generates a detailed movie plot only using emojis when recognizes a valid movie title.
                 EmojiBot reply with 'Honk! Not a movie title!' otherwise.
                 
                 User: {{movieName}}

@@ -19,7 +19,7 @@ import java.util.Scanner;
 
 import static java.util.stream.Collectors.joining;
 
-public class _04_Retrieval {
+public class _03_Retrieval {
 
     private static final String RETRIEVER_DOCUMENT_NAME = "news.pdf";
 
@@ -27,14 +27,10 @@ public class _04_Retrieval {
 
         var openAiKey = System.getenv("OPENAI_API_KEY");
 
-        var chatModel = OpenAiChatModel.withApiKey(openAiKey);
-        var chatMemory = MessageWindowChatMemory.withMaxMessages(10);
-
         var embeddingModel = OpenAiEmbeddingModel.withApiKey(openAiKey);
         var embeddingStore = new InMemoryEmbeddingStore<TextSegment>();
-        var retriever = EmbeddingStoreRetriever.from(embeddingStore, embeddingModel);
 
-        // #1 - Ingesting the document and store in vectorized form
+        // 0 - Ingesting the document and store in vectorized form
         var ingestor = EmbeddingStoreIngestor.builder()
                 .documentSplitter(DocumentSplitters.recursive(500, 0))
                 .embeddingModel(embeddingModel)
@@ -46,6 +42,10 @@ public class _04_Retrieval {
 
         ingestor.ingest(document);
 
+        var chatModel = OpenAiChatModel.withApiKey(openAiKey);
+        var chatMemory = MessageWindowChatMemory.withMaxMessages(10);
+        var retriever = EmbeddingStoreRetriever.from(embeddingStore, embeddingModel);
+
         var promptTemplate = PromptTemplate.from("""
             Answer the following question to the best of your ability: {{question}}
             Base your answer on the following information:
@@ -56,16 +56,18 @@ public class _04_Retrieval {
             while(true) {
 
                 System.out.println("Enter your question: ");
+
+                // 1 - Retrieving the question from the user
                 String question = scanner.nextLine();
 
                 if(question.equals("exit")) {
                     break;
                 }
 
-                // #2 - Retrieving the most relevant segments according to the question
+                // 2, 3 - Retrieving the most relevant segments according to the question
                 var relevantSegments = retriever.findRelevant(question);
 
-                // #3 - Generating the prompt with the relevant segments
+                // 4 - Generating the prompt with the relevant segments
                 var prompt = promptTemplate.apply(
                             Map.of(
                             "question", question,
@@ -77,6 +79,7 @@ public class _04_Retrieval {
 
                 chatMemory.add(response.content());
 
+                // 5 - Printing answer to the user
                 System.out.println(response.content().text());
 
                 System.out.println("\n\n########### TOKEN USAGE ############\n");
@@ -94,7 +97,7 @@ public class _04_Retrieval {
 
     private static Path toPath(String fileName) {
         try {
-            URL fileUrl = _04_Retrieval.class.getResource(fileName);
+            URL fileUrl = _03_Retrieval.class.getResource(fileName);
             return Paths.get(fileUrl.toURI());
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);

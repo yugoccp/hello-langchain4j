@@ -5,7 +5,7 @@ import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.model.output.Response;
 import dev.langchain4j.service.AiServices;
 
-public class _03_Agents {
+public class _04_Agents {
 
     static class Calculator {
         @Tool("Calculates the length of a string")
